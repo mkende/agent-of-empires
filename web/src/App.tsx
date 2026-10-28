@@ -26,6 +26,7 @@ import { safeGetItem, safeRemoveItem } from "./lib/safeStorage";
 import { isAutomatedSession } from "./lib/onboarding";
 import { useWorkspaces } from "./hooks/useWorkspaces";
 import { useLastSessionRestore } from "./hooks/useLastSessionRestore";
+import { useDocumentTitle } from "./hooks/useDocumentTitle";
 import { SCRATCH_GROUP_ID, useRepoGroups } from "./hooks/useRepoGroups";
 import { useSessionGroups } from "./hooks/useSessionGroups";
 import { useAttentionJump } from "./hooks/useAttentionJump";
@@ -607,6 +608,7 @@ function AppContent({
   // Null until the active Session's row loads, so nothing is seeded from a guess.
   const activeRow = sessions.find((s) => s.id === activeSessionId);
   const activeOutsideRepository = activeRow ? Boolean(activeRow.outside_repository) : null;
+  useDocumentTitle(activeRow?.title);
   const {
     layout: paneLayout,
     openTab,
